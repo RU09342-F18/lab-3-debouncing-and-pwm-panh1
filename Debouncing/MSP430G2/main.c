@@ -4,21 +4,21 @@
 
 void main(void)
 {
-	WDTCTL = WDTPW | WDTHOLD;	    // stop watchdog timer
+	WDTCTL = WDTPW | WDTHOLD;       // stop watchdog timer
 	
-	P1DIR |= BIT6;                  // setting P1.6 output direction to 1
-    P1OUT |= BIT3;                  // setting P1.3 to 1
-    P1REN |= BIT3;				    // enabling resister on P1.3
-	P1IE  |= BIT3;    			    // enabling interrupt on P1.3
-    P1IES |= BIT3;                  // setting P1.3 on high/low edge
-    P1IFG &= ~BIT3;                 // clears interrupt flag on P1.3
+  P1DIR |= BIT6;                  // setting P1.6 output direction to 1
+  P1OUT |= BIT3;                  // setting P1.3 to 1
+  P1REN |= BIT3;				          // enabling pull-up resister on P1.3
+  P1IE  |= BIT3;    			        // enabling interrupt on P1.3
+  P1IES |= BIT3;                  // setting P1.3 on high/low edge
+  P1IFG &= ~BIT3;                 // clears interrupt flag on P1.3
 
-    TA0CCTL0 = CCIE;                // enabling CCR0 interrupt
-    TA0CCR0  = 20000;               // reseting timer A to 20000
+  TA0CCTL0 = CCIE;                // enabling CCR0 interrupt
+  TA0CCR0  = 20000;               // reseting timer A to 20000
 
-    _BIS_SR(LPM0 + GIE);            // setting to Low Power Mode with global interrupt enable. 
+  _BIS_SR(LPM0 + GIE);            // setting to Low Power Mode with global interrupt enable. 
 
-    while(1){ }
+  while(1){ }
 }
 
 #pragma vector = TIMER0_A0_VECTOR
